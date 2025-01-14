@@ -14,6 +14,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    super.initState();
+    determinePosition();
+  }
+
   bool inLogin = true;
   @override
   Widget build(BuildContext context) {
