@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "52667528148",
+    "firebase_url": "https://attendance-checker-63276-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "attendance-checker-63276",
+    "storage_bucket": "attendance-checker-63276.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52667528148:android:86c0e9c52c5f6642539c41",
+        "android_client_info": {
+          "package_name": "com.example.geobound_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaQvR9OQPwL0N_MVmFWLLxNRqgHBWtaTo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
