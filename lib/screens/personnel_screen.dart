@@ -4,9 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geobound_mobile/screens/login_screen.dart';
+import 'package:geobound_mobile/services/add_record.dart';
 import 'package:geobound_mobile/widgets/logout_widget.dart';
 import 'package:geobound_mobile/widgets/text_widget.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 
 class PersonnelScreen extends StatefulWidget {
@@ -19,6 +21,31 @@ class PersonnelScreen extends StatefulWidget {
 }
 
 class _PersonnelScreenState extends State<PersonnelScreen> {
+  final List<LatLng> polygon = [
+    const LatLng(8.482233, 124.660752),
+    const LatLng(8.482175, 124.660623),
+    const LatLng(8.481729, 124.660316),
+    const LatLng(8.481019, 124.660092),
+    const LatLng(8.480461, 124.659808),
+    const LatLng(8.480199, 124.659474),
+    const LatLng(8.479843, 124.659193),
+    const LatLng(8.479505, 124.659305),
+    const LatLng(8.479385, 124.659496),
+    const LatLng(8.479483, 124.659668),
+    const LatLng(8.479792, 124.659875),
+    const LatLng(8.480212, 124.660057),
+    const LatLng(8.481004, 124.660201),
+    const LatLng(8.481196, 124.660287),
+    const LatLng(8.481116, 124.660734),
+    const LatLng(8.480887, 124.661596),
+    const LatLng(8.480890, 124.661874),
+    const LatLng(8.480969, 124.661941),
+    const LatLng(8.481418, 124.662017),
+    const LatLng(8.481679, 124.661587),
+    const LatLng(8.481793, 124.661284),
+    const LatLng(8.482212, 124.660751),
+    const LatLng(8.482161, 124.660616),
+  ];
   @override
   void initState() {
     // TODO: implement initState
@@ -34,6 +61,25 @@ class _PersonnelScreenState extends State<PersonnelScreen> {
             'lng': position.longitude,
           });
 
+          // Point to check
+          LatLng pointToCheck = LatLng(position.latitude, position.longitude);
+
+          // Check if the point is inside the polygon
+          final bool isInside = isPointInPolygon(pointToCheck, polygon);
+          final DateTime now = DateTime.now();
+
+          // Format to get only the AM/PM part
+          final String amPm = DateFormat('a').format(now);
+
+          print('Current AM/PM: $amPm'); // Output: AM or PM
+          // Print the result
+          if (isInside) {
+            addRecord(widget.id, amPm == 'AM' ? 'In' : 'Out', amPm);
+            print('The point is inside the polygon!');
+          } else {
+            print('The point is outside the polygon.');
+          }
+
           setState(() {
             lat = position.latitude;
             lng = position.longitude;
@@ -47,6 +93,28 @@ class _PersonnelScreenState extends State<PersonnelScreen> {
 
   double lat = 8.480675;
   double lng = 124.660238;
+
+// Function to check if a point is inside a polygon
+  bool isPointInPolygon(LatLng point, List<LatLng> polygon) {
+    int i;
+    int j = polygon.length - 1; // Initialize `j` with the last index
+    bool isInside = false;
+
+    for (i = 0; i < polygon.length; j = i++) {
+      if (((polygon[i].latitude > point.latitude) !=
+              (polygon[j].latitude > point.latitude)) &&
+          (point.longitude <
+              (polygon[j].longitude - polygon[i].longitude) *
+                      (point.latitude - polygon[i].latitude) /
+                      (polygon[j].latitude - polygon[i].latitude) +
+                  polygon[i].longitude)) {
+        isInside = !isInside; // Toggle the boolean flag
+      }
+    }
+
+    return isInside;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
