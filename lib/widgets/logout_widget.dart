@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geobound_mobile/screens/login_screen.dart';
 
-logout(BuildContext context, Widget navigationRoute) {
+logout(BuildContext context, Widget navigationRoute, String id) {
   return showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -25,6 +26,13 @@ logout(BuildContext context, Widget navigationRoute) {
               ),
               MaterialButton(
                 onPressed: () async {
+                  FirebaseFirestore.instance
+                      .collection('Users')
+                      .doc(id)
+                      .update({
+                    'lat': 0,
+                    'lng': 0,
+                  });
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                         builder: (context) => const LoginScreen()),

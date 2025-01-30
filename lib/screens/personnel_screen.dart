@@ -22,29 +22,24 @@ class PersonnelScreen extends StatefulWidget {
 
 class _PersonnelScreenState extends State<PersonnelScreen> {
   final List<LatLng> polygon = [
-    const LatLng(8.482233, 124.660752),
-    const LatLng(8.482175, 124.660623),
-    const LatLng(8.481729, 124.660316),
-    const LatLng(8.481019, 124.660092),
-    const LatLng(8.480461, 124.659808),
-    const LatLng(8.480199, 124.659474),
-    const LatLng(8.479843, 124.659193),
-    const LatLng(8.479505, 124.659305),
-    const LatLng(8.479385, 124.659496),
-    const LatLng(8.479483, 124.659668),
-    const LatLng(8.479792, 124.659875),
-    const LatLng(8.480212, 124.660057),
-    const LatLng(8.481004, 124.660201),
-    const LatLng(8.481196, 124.660287),
-    const LatLng(8.481116, 124.660734),
-    const LatLng(8.480887, 124.661596),
-    const LatLng(8.480890, 124.661874),
-    const LatLng(8.480969, 124.661941),
-    const LatLng(8.481418, 124.662017),
-    const LatLng(8.481679, 124.661587),
-    const LatLng(8.481793, 124.661284),
-    const LatLng(8.482212, 124.660751),
-    const LatLng(8.482161, 124.660616),
+    const LatLng(8.482386, 124.660703),
+    const LatLng(8.482260, 124.660365),
+    const LatLng(8.481648, 124.660055),
+    const LatLng(8.481202, 124.659958),
+    const LatLng(8.480607, 124.659869),
+    const LatLng(8.480215, 124.659576),
+    const LatLng(8.479867, 124.659387),
+    const LatLng(8.479635, 124.659260),
+    const LatLng(8.479411, 124.659815),
+    const LatLng(8.480161, 124.660293),
+    const LatLng(8.480991, 124.660573),
+    const LatLng(8.480714, 124.661805),
+    const LatLng(8.480902, 124.661981),
+    const LatLng(8.481415, 124.662026),
+    const LatLng(8.481700, 124.661579),
+    const LatLng(8.481852, 124.661223),
+    const LatLng(8.482227, 124.660812),
+    const LatLng(8.482386, 124.660703),
   ];
   @override
   void initState() {
@@ -119,6 +114,7 @@ class _PersonnelScreenState extends State<PersonnelScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: TextWidget(
           text: 'HOME',
           fontSize: 18,
@@ -127,7 +123,7 @@ class _PersonnelScreenState extends State<PersonnelScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              logout(context, const LoginScreen());
+              logout(context, const LoginScreen(), widget.id);
             },
             icon: const Icon(
               Icons.logout,
@@ -140,7 +136,7 @@ class _PersonnelScreenState extends State<PersonnelScreen> {
         options: const MapOptions(
           initialCenter:
               LatLng(8.480675, 124.660238), // Center the map over London
-          initialZoom: 18,
+          initialZoom: 17,
         ),
         children: [
           TileLayer(

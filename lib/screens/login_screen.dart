@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 20,
             ),
             TextWidget(
-              text: 'Admin Account',
+              text: 'Personnel Account',
               fontSize: 18,
               fontFamily: 'Bold',
             ),
