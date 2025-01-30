@@ -66,10 +66,11 @@ class _PersonnelScreenState extends State<PersonnelScreen> {
           // Format to get only the AM/PM part
           final String amPm = DateFormat('a').format(now);
 
-          print('Current AM/PM: $amPm'); // Output: AM or PM
+          DateTime fivePM = DateTime(now.year, now.month, now.day, 17);
+
           // Print the result
           if (isInside) {
-            addRecord(widget.id, amPm == 'AM' ? 'In' : 'Out', amPm);
+            addRecord(widget.id, now.isBefore(fivePM) ? 'In' : 'Out', amPm);
             print('The point is inside the polygon!');
           } else {
             print('The point is outside the polygon.');
